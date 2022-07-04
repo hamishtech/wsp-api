@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post '/auth/login/google', to: 'authentication#login_google'
+      get '/auth/authenticate', to: 'authentication#authenticate_user'
+      get '/auth/fake_auth', to: 'authentication#fake_auth'
       get '/test', to: 'authentication#test'
     end
   end

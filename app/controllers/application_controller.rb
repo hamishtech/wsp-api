@@ -1,14 +1,16 @@
 class ApplicationController < ActionController::API
   include JsonWebToken
   before_action :authenticate
+  include ActionController::Cookies
 
   private
 
   def authenticate
-    header = request.headers['Authorization']
-    header = header.split(' ').last if header
+    jwt = cookies[:jwt]
+    # return head :unauthorized unless jwt
+
     begin
-      @decoded = jwt_decode(header)
+      @decoded = jwt_decode(jwt)
       @current_user = User.find(@decoded[:user_id])
     rescue ActiveRecord::RecordNotFound => e
       render json: { errors: e.message }, status: :unauthorized
