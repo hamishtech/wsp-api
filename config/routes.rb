@@ -9,6 +9,10 @@ Rails.application.routes.draw do
       get '/auth/authenticate', to: 'authentication#authenticate_user'
       get '/auth/fake_auth', to: 'authentication#fake_auth'
       get '/test', to: 'authentication#test'
+
+      resource :spaces
+      resource :buckets
+      resource :links
     end
   end
 end

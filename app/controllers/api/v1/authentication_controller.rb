@@ -51,7 +51,7 @@ class Api::V1::AuthenticationController < ApplicationController
     user || user = User.create(user_details)
     token = jwt_encode({ user_id: user.id, iat: DateTime.now.to_i })
 
-    cookies['jwt'] = { value: token, httponly: true, expires: 100.years.from_now }
+    cookies['jwt'] = { value: token, httponly: true, expires: 2.years.from_now }
 
     { user: }
   end
